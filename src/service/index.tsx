@@ -7,25 +7,22 @@ export function update(state: Store, action: actions.Chess | actions.Receive) {
   let newBoard = JSON.parse(JSON.stringify(state['board']))
   let { player } = state
 
-  if (player === '1') {
-    player = '2'
-  } else {
-    player = '1'
-  }
   newInfos.push(action.info)
   newBoard[action.info.pos].push(action.info.player)
 
   let status = judge(action.type, action.info.player, action.info.pos, newBoard)
 
   if (newInfos.length === 42 && status !== constants.END) {
-    return {
-      ...state,
-      player,
-      status: constants.DEUCE,
-      infos: newInfos,
-      board: newBoard
+    status = constants.DEUCE
+  }
+  if (status !== constants.END && status !== constants.DEUCE) {
+    if (player === '1') {
+      player = '2'
+    } else {
+      player = '1'
     }
   }
+  
   return { ...state, player, status, infos: newInfos, board: newBoard }
 }
 

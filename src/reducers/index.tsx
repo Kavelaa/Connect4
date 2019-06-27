@@ -73,10 +73,21 @@ export function mainReducer(
     case constants.REMOTE_READY:
       return { ...state, status: constants.REMOTE_READY }
     case constants.RESET: {
+      let {status,player} = state
+
       clear()
-      if (state['status'] === constants.REMOTE_READY)
-        return { ...defaultState, status: constants.WAITING }
-      return { ...defaultState, status: constants.WAIT_DECIDE }
+      if (status === constants.REMOTE_READY) {
+        status = constants.WAITING
+        if (document.location.hash) player = '1'
+        else player = '2'
+      }
+      else {
+        status = constants.WAIT_DECIDE
+        if (document.location.hash) player = '2'
+        else player = '1'
+      }
+
+      return { ...defaultState, status, player }
     }
     default:
       return state

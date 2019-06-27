@@ -50,8 +50,8 @@ const StatusBar = ({ player, status, infos, socket, dispatch }: Props) => {
       semantic = '对方已准备'
       break
     case END:
-      if (player === '1') semantic = '2P胜！'
-      else semantic = '1P胜！'
+      if (player === '1') semantic = '1P胜！'
+      else semantic = '2P胜！'
       break
     case DEUCE:
       semantic = '平局'
