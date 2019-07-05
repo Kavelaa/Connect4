@@ -31,7 +31,7 @@ const StatusBar = ({ player, status, infos, socket, dispatch }: Props) => {
   }
   const handleLeave = () => {
     dispatch(Init())
-    socket.emit('leave')
+    socket.close()
   }
 
   switch (status) {
