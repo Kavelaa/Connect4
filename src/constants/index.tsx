@@ -1,4 +1,5 @@
 export const INIT = 'INIT'
+export type INIT = typeof INIT
 
 export const RECEIVE = 'RECEIVE'
 export type RECEIVE = typeof RECEIVE
@@ -29,3 +30,6 @@ export const DEUCE = 'DEUCE'
 
 export const REMOTE_READY = 'REMOTE_READY'
 export type REMOTE_READY = typeof REMOTE_READY
+
+export const REMOTE_LEAVE = 'REMOTE_LEAVE'
+export type REMOTE_LEAVE = typeof REMOTE_LEAVE

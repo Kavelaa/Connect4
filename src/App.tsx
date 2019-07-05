@@ -9,7 +9,9 @@ import {
   Undo,
   Gaming,
   Waiting,
-  RemoteReady
+  RemoteReady,
+  WaitDecide,
+  RemoteLeave
 } from './actions'
 import StatusBarLTR from './containers/StatusBarLTR'
 import { WAIT_DECIDE } from './constants'
@@ -42,9 +44,22 @@ class App extends React.Component<AppProps> {
       console.log(`Your id ${socket.id}`)
     })
 
+    socket.on('random-1p', () => {
+      dispatch(WaitDecide())
+    })
+
+    socket.on('random-2p', () => {
+      dispatch(Waiting())
+      window.location.hash = '#2p'
+    })
+
     socket.on('remote-ready', () => {
       console.log('开始')
       dispatch(Gaming())
+    })
+
+    socket.on('remote-leave', () => {
+      dispatch(RemoteLeave())
     })
 
     socket.on('remote-chess', (info: Info) => {

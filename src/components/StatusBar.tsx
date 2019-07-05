@@ -9,7 +9,7 @@ import {
   WAIT_DECIDE,
   DEUCE
 } from '../constants'
-import { Reset, WaitDecide, Info } from '../actions'
+import { Reset, WaitDecide, Info, Init } from '../actions'
 
 interface Props {
   player: string
@@ -28,6 +28,10 @@ const StatusBar = ({ player, status, infos, socket, dispatch }: Props) => {
   const handleUndo = () => {
     dispatch(WaitDecide())
     socket.emit('undo')
+  }
+  const handleLeave = () => {
+    dispatch(Init())
+    socket.emit('leave')
   }
 
   switch (status) {
@@ -78,10 +82,12 @@ const StatusBar = ({ player, status, infos, socket, dispatch }: Props) => {
           </div>
         )}
         {(status === END || status === REMOTE_READY || status === DEUCE) && (
+          <>
           <div className="btn" onClick={handleRestart}>
-            重新开始
+            再来一局
           </div>
-        )}
+          <div className="btn" onClick={handleLeave}>回到菜单</div>
+        </>)}
       </div>
       <div
         className={`player-info ${

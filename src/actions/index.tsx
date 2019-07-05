@@ -5,6 +5,10 @@ export interface Dealing {
   (dispatch: React.Dispatch<Chess | Receive>): Promise<void>
 }
 
+export interface Init {
+  type: constants.INIT
+}
+
 export interface Gaming {
   type: constants.GAMING
 }
@@ -43,9 +47,19 @@ export interface RemoteReady {
   type: constants.REMOTE_READY
 }
 
+export interface RemoteLeave {
+  type: constants.REMOTE_LEAVE
+}
+
 export interface Info {
   player: string
   pos: number
+}
+
+export function Init() {
+  return {
+    type: constants.INIT
+  }
 }
 
 export function Gaming(): Gaming {
@@ -101,5 +115,11 @@ export function Reset(): Reset {
 export function RemoteReady(): RemoteReady {
   return {
     type: constants.REMOTE_READY
+  }
+}
+
+export function RemoteLeave() {
+  return {
+    type: constants.REMOTE_LEAVE
   }
 }
